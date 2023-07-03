@@ -24,10 +24,17 @@ interface BaseButtonProps {
   href?: string;
 }
 
-const AuroraButton: React.FC<BaseButtonProps> = (props) => {
-  const { btnType, disabled, size, children, href } = props;
+// 描述Button元素的属性
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>;
+// 描述a元素的属性
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+// 使用Partial让泛型中的所有属性变为可选
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
+
+const AuroraButton: React.FC<ButtonProps> = (props) => {
+  const { btnType, disabled, size, children, href, className, ...restProps } = props;
   // 根据传过来的属性来生成类名
-  const classes = classNames('btn', {
+  const classes = classNames('btn', className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     // 提供了disabled属性，且按钮属性为'Link'
@@ -36,7 +43,7 @@ const AuroraButton: React.FC<BaseButtonProps> = (props) => {
   // Link类型的按钮
   if (btnType === ButtonType.Link && href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} {...restProps}>
         {children}
       </a>
     );
@@ -44,7 +51,7 @@ const AuroraButton: React.FC<BaseButtonProps> = (props) => {
   // 除Link以外的类型
   else {
     return (
-      <button className={classes} disabled={disabled}>
+      <button className={classes} disabled={disabled} {...restProps}>
         {children}
       </button>
     );

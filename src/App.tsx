@@ -7,12 +7,14 @@ import AuroraButton, {
 const App: React.FC = () => {
   return (
     <div>
-      <AuroraButton
-        disabled
-        size={ButtonSize.Large}
-        btnType={ButtonType.Default}
-      >
-        hello world
+      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Primary}>
+        Large Primary
+      </AuroraButton>
+      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Danger}>
+        Large Primary
+      </AuroraButton>
+      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Default}>
+        Large Primary
       </AuroraButton>
       <AuroraButton btnType={ButtonType.Link} href="https://www.baidu.com">
         Baidu Link

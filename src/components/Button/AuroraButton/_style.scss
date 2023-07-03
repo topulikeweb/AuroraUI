@@ -1,4 +1,5 @@
 @import "../../../styles/variables";
+@import "../../../styles/minix";
 
 .btn {
   position: relative;
@@ -11,9 +12,7 @@
   vertical-align: middle;
   background-image: none;
   border: $btn-border-width solid transparent;
-  padding: $btn-padding-y $btn-padding-x;
-  font-size: $btn-font-size;
-  border-radius: $border-radius;
+  @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-border-radius);
   box-shadow: $btn-box-shadow;
   cursor: pointer;
   transition: $btn-transition;
@@ -26,5 +25,49 @@
     > * {
       pointer-events: none;
     }
+  }
+}
+
+.btn-lg {
+  @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-border-radius);
+}
+
+.btn-small {
+  @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-border-radius);
+}
+
+.btn-primary {
+  @include button-style($primary, $primary, $white)
+}
+
+.btn-danger {
+  @include button-style($danger, $white, $white)
+}
+
+.btn-default {
+  @include button-style($white, $gray-400, $body-color, $white, $primary)
+}
+
+.btn-link {
+  font-weight: $font-weight-normal;
+  color: $btn-link-color;
+  text-decoration: $link-decoration;
+  box-shadow: none;
+
+  &:hover {
+    color: $btn-link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &.focus,
+  &:focus {
+    text-decoration: $link-hover-decoration;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $btn-link-hover-color;
+    pointer-events: none;
   }
 }
