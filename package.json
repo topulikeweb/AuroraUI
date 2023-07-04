@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/classnames": "^2.3.1",
     "@types/jest": "^27.5.2",
@@ -49,7 +47,11 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "jest": "^27.5.1",
     "postcss": "^8.4.24",
+    "react-test-renderer": "^18.2.0",
     "resolve-url-loader": "^5.0.0"
   }
 }

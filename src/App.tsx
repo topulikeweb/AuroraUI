@@ -10,7 +10,7 @@ const App: React.FC = () => {
       <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Primary}>
         Large Primary
       </AuroraButton>
-      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Danger}>
+      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Danger} disabled>
         Large Primary
       </AuroraButton>
       <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Default}>
