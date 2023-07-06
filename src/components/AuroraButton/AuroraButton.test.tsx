@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import AuroraButton, { ButtonProps, ButtonSize, ButtonType } from './AuroraButton';
-import '../../../../setupTests';
+import '../../../setupTests';
 
 const defaultProps = {
   onClick: jest.fn(),
