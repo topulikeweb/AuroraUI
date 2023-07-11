@@ -472,4 +472,97 @@ main {
   pointer-events: none;
 }
 
+.viking-menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 30px;
+  list-style: none;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.viking-menu > .menu-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, border-color 0.15s ease-in-out;
+}
+.viking-menu > .menu-item:hover, .viking-menu > .menu-item:focus {
+  text-decoration: none;
+}
+.viking-menu > .menu-item.is-disabled {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: default;
+}
+.viking-menu > .menu-item.is-active, .viking-menu > .menu-item:hover {
+  color: #0d6efd;
+  border-bottom: 2px solid #0d6efd;
+}
+.viking-menu .submenu-item {
+  position: relative;
+}
+.viking-menu .submenu-item .submenu-title {
+  display: flex;
+  align-items: center;
+}
+.viking-menu .submenu-item .arrow-icon {
+  transition: transform 0.25s ease-in-out;
+  margin-left: 3px;
+}
+.viking-menu .submenu-item:hover .arrow-icon {
+  transform: rotate(180deg);
+}
+.viking-menu .is-vertical .arrow-icon {
+  transform: rotate(0deg) !important;
+}
+.viking-menu .is-vertical.is-opened .arrow-icon {
+  transform: rotate(180deg) !important;
+}
+.viking-menu .viking-submenu {
+  display: none;
+  list-style: none;
+  padding-left: 0;
+  white-space: nowrap;
+  transition: color 0.3s ease-in-out, border-color 0.15s ease-in-out;
+}
+.viking-menu .viking-submenu .menu-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, border-color 0.15s ease-in-out;
+  color: #212529;
+}
+.viking-menu .viking-submenu .menu-item.is-active, .viking-menu .viking-submenu .menu-item:hover {
+  color: #0d6efd !important;
+}
+.viking-menu .viking-submenu.menu-opened {
+  display: block;
+}
+
+.menu-horizontal > .menu-item {
+  border-bottom: 2px solid transparent;
+}
+.menu-horizontal .viking-submenu {
+  position: absolute;
+  background: #fff;
+  z-index: 100;
+  top: calc(100% + 8px);
+  left: 0;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+}
+
+.menu-vertical {
+  flex-direction: column;
+  border-bottom: 0px;
+  margin: 10px 20px;
+  border-right: 1px solid #dee2e6;
+}
+.menu-vertical > .menu-item {
+  border-left: 2px solid transparent;
+}
+.menu-vertical > .menu-item.is-active, .menu-vertical > .menu-item:hover {
+  border-bottom: 0px;
+  border-left: 2px solid #0d6efd;
+}
+
 /*# sourceMappingURL=index.css.map */

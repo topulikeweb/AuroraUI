@@ -1,10 +1,9 @@
-import React, { memo, ReactNode, useContext } from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from './AuroraMenu';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 
 export interface MenuItemProps {
-  index: number;
+  index?: number;
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -20,7 +19,7 @@ const AuroraMenuItem: React.FC<MenuItemProps> = (props) => {
   });
   const handleClick = () => {
     // 触发父组件的onSelect，设置激活状态的index
-    if (!disabled && context.onSelect) {
+    if (!disabled && context.onSelect && typeof index === 'number') {
       context.onSelect(index);
     }
   };
@@ -40,4 +39,6 @@ const AuroraMenuItem: React.FC<MenuItemProps> = (props) => {
 AuroraMenuItem.defaultProps = {
   children: '菜单',
 };
-export default memo(AuroraMenuItem);
+
+AuroraMenuItem.displayName = 'AuroraMenuItem';
+export default AuroraMenuItem;

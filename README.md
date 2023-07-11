@@ -1,8 +1,14 @@
-# 组件库基本技术
+# 组件库基本技术栈
 
-React
+**React
 Typescript
-normalize.css
+scss
+classnames
+normalize.css**
+
+测试：
+
+**jest**
 
 # 组件实现思路
 
