@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+
+// 使用scss的遍历语句来进行遍历
+@each $key, $val in $theme-colors {
+  .icon-#{$key} {
+    color: $val;
+  }
+}

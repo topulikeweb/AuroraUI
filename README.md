@@ -4,6 +4,7 @@
 Typescript
 scss
 classnames
+fontawesome
 normalize.css**
 
 测试：
@@ -29,3 +30,8 @@ normalize.css**
 在每个MenuItem组件中传入index参数，onSelect函数中传递index参数，这样就可以知道点击的组件的index
 
 用户可以通过获取index来进行操作
+
+### 如何实现下拉框的操作
+首先menu分为了两种模式，横向和纵向，横向的下拉框由鼠标经过触发，纵向由鼠标点击触发，先创建Submenu组件，处理children
+
+根据menu组件传递过来的mode属性判断是哪一种状态，然后绑定相应的事件

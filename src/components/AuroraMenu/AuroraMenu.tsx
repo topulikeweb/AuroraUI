@@ -4,33 +4,35 @@ import classNames from 'classnames';
 import { MenuItemProps } from './AuroraMenuItem';
 
 type MenuMode = 'horizontal' | 'vertical';
-type SelectCallback = (selectIndex: number) => void;
+type SelectCallback = (selectIndex: string) => void;
 
 export interface MenuProps {
   className?: string;
   style?: React.CSSProperties;
   onSelect?: SelectCallback;
   mode?: MenuMode;
-  defaultIndex?: number;
+  defaultIndex?: string;
   children?: ReactNode;
+  defaultOpenSubMenus?: string[];
 }
 
 export interface IMenuProps {
-  index: number;
+  index: string;
   onSelect?: SelectCallback;
   mode?: MenuMode;
+  defaultOpenSubMenus?: string[];
 }
 
-export const MenuContext = createContext<IMenuProps>({ index: 0 });
+export const MenuContext = createContext<IMenuProps>({ index: '0' });
 const AuroraMenu: React.FC<MenuProps> = (props) => {
-  const { className, style, onSelect, mode, defaultIndex, children } = props;
+  const { className, style, onSelect, mode, defaultIndex, defaultOpenSubMenus, children } = props;
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames('viking-menu', className, {
     'menu-vertical': mode === 'vertical',
-    'menu-horizontal': mode === 'horizontal',
+    'menu-horizontal': mode !== 'vertical',
   });
   // 设置点击事件
-  const handleClick = (index: number) => {
+  const handleClick = (index: string) => {
     setActive(index);
     if (onSelect) {
       onSelect(index);
@@ -38,9 +40,10 @@ const AuroraMenu: React.FC<MenuProps> = (props) => {
   };
   // 传递给menuItem的数据
   const passedContext: IMenuProps = {
-    index: currentActive ? currentActive : 0,
+    index: currentActive ? currentActive : '0',
     onSelect: handleClick,
     mode: mode,
+    defaultOpenSubMenus: defaultOpenSubMenus,
   };
   // 多个MenuItem构成一个数组，然后使用map进行遍历
   const renderChildren = () => {
@@ -50,7 +53,7 @@ const AuroraMenu: React.FC<MenuProps> = (props) => {
       if (displayName === 'AuroraMenuItem' || displayName === 'AuroraSubMenu') {
         // 克隆组件，然后传递index参数到组件
         return React.cloneElement(childElement, {
-          index,
+          index: index.toString(),
         });
       } else {
         console.error('Warning:Menu has a child which is not a menuItem component');
@@ -65,7 +68,8 @@ const AuroraMenu: React.FC<MenuProps> = (props) => {
 };
 
 AuroraMenu.defaultProps = {
-  defaultIndex: 0,
-  mode: 'horizontal',
+  defaultIndex: '0',
+  mode: 'vertical',
+  defaultOpenSubMenus: [],
 };
 export default memo(AuroraMenu);
