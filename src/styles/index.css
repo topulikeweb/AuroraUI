@@ -519,11 +519,9 @@ main {
   transform: rotate(180deg) !important;
 }
 .viking-menu .viking-submenu {
-  display: none;
   list-style: none;
   padding-left: 0;
   white-space: nowrap;
-  transition: color 0.3s ease-in-out, border-color 0.15s ease-in-out;
 }
 .viking-menu .viking-submenu .menu-item {
   padding: 0.5rem 1rem;
@@ -534,10 +532,6 @@ main {
 .viking-menu .viking-submenu .menu-item.is-active, .viking-menu .viking-submenu .menu-item:hover {
   color: #0d6efd !important;
 }
-.viking-menu .viking-submenu.menu-opened {
-  display: block;
-}
-
 .menu-horizontal > .menu-item {
   border-bottom: 2px solid transparent;
 }
@@ -595,6 +589,98 @@ main {
 
 .icon-dark {
   color: #343a40;
+}
+
+.zoom-in-top-enter {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.zoom-in-top-enter-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: center top;
+}
+
+.zoom-in-top-exit {
+  opacity: 1;
+}
+
+.zoom-in-top-exit-active {
+  opacity: 0;
+  transform: scaleY(0);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: center top;
+}
+
+.zoom-in-left-enter {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+}
+
+.zoom-in-left-enter-active {
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: top left;
+}
+
+.zoom-in-left-exit {
+  opacity: 1;
+}
+
+.zoom-in-left-exit-active {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: top left;
+}
+
+.zoom-in-right-enter {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+}
+
+.zoom-in-right-enter-active {
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: top right;
+}
+
+.zoom-in-right-exit {
+  opacity: 1;
+}
+
+.zoom-in-right-exit-active {
+  opacity: 0;
+  transform: scale(0.45, 0.45);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: top right;
+}
+
+.zoom-in-bottom-enter {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.zoom-in-bottom-enter-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: center bottom;
+}
+
+.zoom-in-bottom-exit {
+  opacity: 1;
+}
+
+.zoom-in-bottom-exit-active {
+  opacity: 0;
+  transform: scaleY(0);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  transform-origin: center bottom;
 }
 
 /*# sourceMappingURL=index.css.map */

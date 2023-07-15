@@ -22,7 +22,6 @@ export interface IMenuProps {
   mode?: MenuMode;
   defaultOpenSubMenus?: string[];
 }
-
 export const MenuContext = createContext<IMenuProps>({ index: '0' });
 const AuroraMenu: React.FC<MenuProps> = (props) => {
   const { className, style, onSelect, mode, defaultIndex, defaultOpenSubMenus, children } = props;

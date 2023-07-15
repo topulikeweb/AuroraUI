@@ -2,9 +2,11 @@ import React, { FunctionComponentElement, ReactNode, useContext, useState } from
 import classNames from 'classnames';
 import { MenuContext } from './AuroraMenu';
 import { MenuItemProps } from './AuroraMenuItem';
-import AuroraIcon, { IconProps } from '../AuroraIcon/AuroraIcon';
+import AuroraIcon from '../AuroraIcon/AuroraIcon';
 import { IconProp, library, SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { CSSTransition } from 'react-transition-group';
+import AuroraTransition from '../AuroraTransition/AuroraTransition';
 
 library.add(fas);
 
@@ -76,7 +78,12 @@ const AuroraSubMenu: React.FC<SubMenuProps> = (props) => {
         console.error('Warning:Menu has a child which is not a menuItem component');
       }
     });
-    return <ul className={subMenuClasses}>{childrenComponent}</ul>;
+    return (
+      // unMountOnExit 属性让li进行动态添加，最开始li不会被渲染，点击后才会被添加到DOM
+      <AuroraTransition in={menuOpen} timeout={300} animation="zoom-in-top">
+        <ul className={subMenuClasses}>{childrenComponent}</ul>
+      </AuroraTransition>
+    );
   };
   return (
     <li key={index} className={classes} {...hoverEvent} {...clickEvents}>

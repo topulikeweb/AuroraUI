@@ -1,14 +1,15 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import AuroraButton, { ButtonSize, ButtonType } from './components/AuroraButton/AuroraButton';
 import AuroraMenu from './components/AuroraMenu/AuroraMenu';
 import AuroraMenuItem from './components/AuroraMenu/AuroraMenuItem';
 import AuroraSubMenu from './components/AuroraMenu/AuroraSubMenu';
-import AuroraIcon from './components/AuroraIcon/AuroraIcon';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // 添加所有SVG图标
 library.add(fas);
 const App: React.FC = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <div>
       <AuroraMenu
