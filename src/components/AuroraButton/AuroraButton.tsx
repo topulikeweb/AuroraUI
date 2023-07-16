@@ -2,18 +2,10 @@ import React, { memo } from 'react';
 import classNames from 'classnames';
 
 // 按钮大小
-export enum ButtonSize {
-  Large = 'lg',
-  Small = 'sm',
-}
+export type ButtonSize = 'lg' | 'sm';
 
 // 按钮类型
-export enum ButtonType {
-  Primary = 'primary',
-  Default = 'default',
-  Danger = 'danger',
-  Link = 'link',
-}
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link';
 
 interface BaseButtonProps {
   className?: string;
@@ -38,10 +30,10 @@ const AuroraButton: React.FC<ButtonProps> = (props) => {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     // 提供了disabled属性，且按钮属性为'Link'
-    disabled: disabled && btnType === ButtonType.Link,
+    disabled: disabled && btnType === 'link',
   });
   // Link类型的按钮
-  if (btnType === ButtonType.Link && href) {
+  if (btnType === 'link' && href) {
     return (
       <a href={href} className={classes} {...restProps}>
         {children}
@@ -60,7 +52,7 @@ const AuroraButton: React.FC<ButtonProps> = (props) => {
 
 AuroraButton.defaultProps = {
   disabled: false,
-  btnType: ButtonType.Default,
+  btnType: 'default',
   children: '按钮',
 };
 export default memo(AuroraButton);

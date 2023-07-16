@@ -1,21 +1,21 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import AuroraButton, { ButtonProps, ButtonSize, ButtonType } from './AuroraButton';
+import AuroraButton, { ButtonProps } from './AuroraButton';
 import '../../../setupTests';
 
 const defaultProps = {
   onClick: jest.fn(),
 };
 const testType: ButtonProps = {
-  btnType: ButtonType.Primary,
-  size: ButtonSize.Large,
+  btnType: 'primary',
+  size: 'lg',
   className: 'testClass',
 };
 
 const testLink: ButtonProps = {
-  btnType: ButtonType.Link,
+  btnType: 'link',
   className: 'testLinkClass',
-  size: ButtonSize.Small,
+  size: 'sm',
 };
 
 const disabledProps: ButtonProps = {

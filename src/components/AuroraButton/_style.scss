@@ -29,11 +29,11 @@
 }
 
 .btn-lg {
-  @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-border-radius);
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
 }
 
-.btn-small {
-  @include button-size($btn-padding-x, $btn-padding-y, $btn-font-size, $btn-border-radius);
+.btn-sm {
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
 }
 
 .btn-primary {

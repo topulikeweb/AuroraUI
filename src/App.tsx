@@ -1,15 +1,15 @@
 import React, { memo, useState } from 'react';
-import AuroraButton, { ButtonSize, ButtonType } from './components/AuroraButton/AuroraButton';
+import AuroraButton from './components/AuroraButton/AuroraButton';
 import AuroraMenu from './components/AuroraMenu/AuroraMenu';
 import AuroraMenuItem from './components/AuroraMenu/AuroraMenuItem';
 import AuroraSubMenu from './components/AuroraMenu/AuroraSubMenu';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import AuroraTransition from './components/AuroraTransition/AuroraTransition';
 // 添加所有SVG图标
 library.add(fas);
 const App: React.FC = () => {
   const [show, setShow] = useState(false);
-
   return (
     <div>
       <AuroraMenu
@@ -28,18 +28,31 @@ const App: React.FC = () => {
           <AuroraMenuItem>group3</AuroraMenuItem>
         </AuroraSubMenu>
       </AuroraMenu>
-      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Primary}>
-        Large Primary
+      <AuroraButton
+        size={'lg'}
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        Toggle
       </AuroraButton>
-      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Danger} disabled>
-        Large Primary
-      </AuroraButton>
-      <AuroraButton size={ButtonSize.Large} btnType={ButtonType.Default}>
-        Large Primary
-      </AuroraButton>
-      <AuroraButton btnType={ButtonType.Link} href="https://www.baidu.com">
-        Baidu Link
-      </AuroraButton>
+      <AuroraTransition in={show} timeout={300} animation={'zoom-in-left'}>
+        <div>
+          <p>
+            Edit<code>src/App.tsx</code>
+          </p>
+          <p>
+            Edit<code>src/App.tsx</code>
+          </p>
+          <p>
+            Edit<code>src/App.tsx</code>
+          </p>
+        </div>
+      </AuroraTransition>
+
+      <AuroraTransition in={show} timeout={300} animation={'zoom-in-left'} wrapper>
+        <AuroraButton>点击</AuroraButton>
+      </AuroraTransition>
     </div>
   );
 };
