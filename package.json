@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@storybook/addon-essentials": "7.0.27",
+    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-interactions": "7.0.27",
     "@storybook/addon-links": "7.0.27",
     "@storybook/blocks": "7.0.27",

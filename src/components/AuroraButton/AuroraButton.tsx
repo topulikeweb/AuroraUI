@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import classNames from 'classnames';
-
+import './_style.scss';
 // 按钮大小
 export type ButtonSize = 'lg' | 'sm';
 
