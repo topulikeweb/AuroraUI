@@ -2,11 +2,20 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import AuroraButton from './AuroraButton';
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 const meta = {
   title: 'Button Component',
   component: AuroraButton,
   tags: ['autodocs'],
+  parameters: {
+    controls: { expanded: true },
+    docs: {
+      description: {
+        component: 'Button component for your UI.',
+      },
+    },
+  },
 } satisfies Meta<typeof AuroraButton>;
 
 export default meta;
@@ -17,35 +26,43 @@ type Story = StoryObj<typeof meta>;
 //
 // // const CenterDecorator: Story = (storyFn: any) => <div style={styles}>{storyFn()}</div>;
 export const 默认的Button: Story = {
-  render: () => {
-    return <AuroraButton onClick={action('clicked')}>default button</AuroraButton>;
+  args: {
+    children: 'default button',
+    onClick: action('click'),
   },
 };
 
-export const 不同尺寸的Button: Story = {
-  render: () => (
-    <>
-      {/*大号Button*/}
-      <AuroraButton size={'lg'}>primary button</AuroraButton>
-      {/*正常Button*/}
-      <AuroraButton>danger button</AuroraButton>
-      {/*小号Button*/}
-      <AuroraButton size={'sm'}>danger button</AuroraButton>
-    </>
-  ),
+export const 大号的Button: Story = {
+  args: {
+    children: 'large button',
+    size: 'lg',
+  },
 };
 
-export const 不同类型的Button: Story = {
-  render: () => (
-    <>
-      {/*primary类型*/}
-      <AuroraButton btnType={'primary'}>primary button</AuroraButton>
-      {/*danger类型*/}
-      <AuroraButton btnType={'danger'}>danger button</AuroraButton>
-      {/*link类型*/}
-      <AuroraButton btnType={'link'} href="https://google.com">
-        link button
-      </AuroraButton>
-    </>
-  ),
+export const 小号的Button: Story = {
+  args: {
+    children: 'small button',
+    size: 'sm',
+  },
+};
+
+export const danger类型的Button: Story = {
+  args: {
+    btnType: 'danger',
+    children: 'danger button',
+  },
+};
+
+export const primary类型的Button: Story = {
+  args: {
+    btnType: 'primary',
+    children: 'primary button',
+  },
+};
+export const link类型的Button: Story = {
+  args: {
+    href: 'https://github.com/topulikeweb',
+    btnType: 'link',
+    children: 'link button',
+  },
 };

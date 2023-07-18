@@ -1,12 +1,11 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-
 const config: StorybookConfig = {
-  // 匹配文件的路径
-  stories: ['../src/**/*.mdx', '../src/components/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/preset-create-react-app',
+    '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
   ],
   framework: {
