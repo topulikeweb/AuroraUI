@@ -1,18 +1,26 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Story } from '@storybook/addon-docs';
 import AuroraButton from './AuroraButton';
-import { Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 const meta = {
   title: 'Button Component',
   component: AuroraButton,
   tags: ['autodocs'],
+  argTypes: {
+    children: {
+      description: '按钮文字',
+    },
+    onClick: {
+      description: '点击触发的函数',
+    },
+  },
   parameters: {
     controls: { expanded: true },
     docs: {
       description: {
-        component: 'Button component for your UI.',
+        component: 'import {AuroraButton} from AuroraUI',
       },
     },
   },
@@ -20,11 +28,7 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-// const styles: React.CSSProperties = {
-//   textAlign: 'center',
-// };
-//
-// // const CenterDecorator: Story = (storyFn: any) => <div style={styles}>{storyFn()}</div>;
+
 export const 默认的Button: Story = {
   args: {
     children: 'default button',

@@ -6,6 +6,7 @@ import AuroraSubMenu from './components/AuroraMenu/AuroraSubMenu';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import AuroraTransition from './components/AuroraTransition/AuroraTransition';
+import AuroraInput from './components/AuroraInput/AuroraInput';
 // 添加所有SVG图标
 library.add(fas);
 const App: React.FC = () => {
@@ -53,6 +54,8 @@ const App: React.FC = () => {
       <AuroraTransition in={show} timeout={300} animation={'zoom-in-left'} wrapper>
         <AuroraButton>点击</AuroraButton>
       </AuroraTransition>
+
+      <AuroraInput style={{ width: 300 }}></AuroraInput>
     </div>
   );
 };

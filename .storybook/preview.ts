@@ -1,11 +1,35 @@
-import type { Preview } from '@storybook/react';
+/**
+ * @typedef {import('@storybook/react').Preview} Preview
+ */
 
-const preview: Preview = {
+/**
+ * The preview configuration object.
+ * @type {Preview}
+ */
+const preview = {
   parameters: {
+    /**
+     * Configure actions addon.
+     * @type {Object}
+     */
     actions: { argTypesRegex: '^on[A-Z].*' },
+
+    /**
+     * Configure controls addon.
+     * @type {Object}
+     */
     controls: {
       matchers: {
+        /**
+         * Matcher for color controls.
+         * @type {RegExp}
+         */
         color: /(background|color)$/i,
+
+        /**
+         * Matcher for date controls.
+         * @type {RegExp}
+         */
         date: /Date$/,
       },
     },
