@@ -55,7 +55,7 @@ const App: React.FC = () => {
         <AuroraButton>点击</AuroraButton>
       </AuroraTransition>
 
-      <AuroraInput style={{ width: 300 }}></AuroraInput>
+      <AuroraInput style={{ width: 300 }} defaultValue={1111} value={'hhhh'}></AuroraInput>
     </div>
   );
 };

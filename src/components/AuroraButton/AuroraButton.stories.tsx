@@ -4,6 +4,13 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/addon-docs';
 import AuroraButton from './AuroraButton';
 
+/**
+ * 如何使用AuroraButton
+ *
+ * ~~~js
+ * import {AuroraButton} from 'AuroraUI'
+ * ~~~
+ */
 const meta = {
   title: 'Button Component',
   component: AuroraButton,
@@ -19,9 +26,7 @@ const meta = {
   parameters: {
     controls: { expanded: true },
     docs: {
-      description: {
-        component: 'import {AuroraButton} from AuroraUI',
-      },
+      description: {},
     },
   },
 } satisfies Meta<typeof AuroraButton>;

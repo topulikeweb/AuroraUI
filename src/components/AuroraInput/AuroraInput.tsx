@@ -17,40 +17,40 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
 }
 
 export const AuroraInput: React.FC<InputProps> = (props) => {
-  const { disabled, size, icon, prepend, append, style, ...restProps } = props;
+  const { disabled, size, icon, prepend, value, append, style, ...restProps } = props;
   // 根据属性判断className
   const classes = classNames('viking-input-wrapper', {
     [`input-size-${size}`]: size,
     'is-disabled': disabled,
     'input-group': prepend || append,
-    'input-group-prepend': prepend,
-    'input-group-append': append,
+    'input-group-prepend': !!prepend,
+    'input-group-append': !!append,
   });
   // 让input中始终保持有值，避免出现undefined和null的情况出现
   const fixControlledValue = (value: any) => {
-    if (value) {
-      return value;
-    } else {
+    if (typeof value === 'undefined' || value === null) {
       return '';
+    } else {
+      return value;
     }
   };
-  // 如果用户在props中传递了value，就将原来的的value换掉，如果没设置就返回''
+  // 如果用户传递了value，就将原来的value经过处理换掉，防止出现undefined和null的情况出现
   if ('value' in restProps) {
-    delete restProps.value;
-    restProps.value = fixControlledValue(props.value);
+    delete restProps.defaultValue;
+    restProps.value = fixControlledValue(restProps.value);
   }
   return (
     <div className={classes} style={style}>
       {/*前缀*/}
-      {prepend && <div className="viking-input-group-prepend"></div>}
+      {prepend && <div className="viking-input-group-prepend">{prepend}</div>}
       {/*图标*/}
       {icon && (
         <div className="icon-wrapper">
-          <AuroraIcon icon={icon}></AuroraIcon>
+          <AuroraIcon icon={icon} title={`title-${icon}`}></AuroraIcon>
         </div>
       )}
       {/*输入框*/}
-      <input className="viking-input-inner" disabled={disabled} {...restProps} />
+      <input className="viking-input-inner" disabled={disabled} {...restProps} value={value} />
       {/*后缀*/}
       {append && <div className="viking-input-group-append">{append}</div>}
     </div>

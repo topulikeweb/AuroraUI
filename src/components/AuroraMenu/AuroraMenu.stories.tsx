@@ -6,6 +6,13 @@ import AuroraMenuItem from './AuroraMenuItem';
 import AuroraSubMenu, { SubMenuProps } from './AuroraSubMenu';
 import './_style.scss';
 
+/**
+ * 如何使用AuroraMenu？
+ *
+ * ~~~js
+ * import {AuroraMenu} from 'AuroraUI'
+ * ~~~
+ */
 const meta: Meta = {
   title: 'Menu Component',
   component: AuroraMenu,
