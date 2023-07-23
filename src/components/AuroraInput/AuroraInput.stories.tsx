@@ -8,6 +8,8 @@ import AuroraInput from './AuroraInput';
  * ~~~js
  * import {AuroraInput} from 'AuroraUI'
  * ~~~
+ *
+ * 基本是支持所有的 HTMLInput 的所有属性
  */
 const meta: Meta = {
   title: 'Input Component',
