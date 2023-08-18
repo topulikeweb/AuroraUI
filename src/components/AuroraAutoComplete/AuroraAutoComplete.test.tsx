@@ -2,7 +2,8 @@ import React from 'react';
 import { config } from 'react-transition-group';
 import { render, RenderResult, fireEvent } from '@testing-library/react';
 import { AuroraAutoComplete, autoCompleteProps } from './AuroraAutoComplete';
-
+import { wait } from '@testing-library/user-event/dist/utils';
+import './_style.scss';
 config.disabled = true;
 
 const testArray = [
@@ -50,9 +51,8 @@ describe('test AutoComplete component', () => {
   it('should provide keyboard support', async () => {
     // input change
     fireEvent.change(inputNode, { target: { value: 'a' } });
-    await wait(() => {
-      expect(wrapper.queryByText('ab')).toBeInTheDocument();
-    });
+    await wait(1000);
+    await expect(wrapper.queryByText('ab')).toBeTruthy();
     const firstResult = wrapper.queryByText('ab');
     const secondResult = wrapper.queryByText('abc');
 
@@ -73,9 +73,7 @@ describe('test AutoComplete component', () => {
   it('click outside should hide the dropdown', async () => {
     // input change
     fireEvent.change(inputNode, { target: { value: 'a' } });
-    await wait(() => {
-      expect(wrapper.queryByText('ab')).toBeInTheDocument();
-    });
+    await expect(wrapper.queryByText('ab')).toBeInTheDocument();
     fireEvent.click(document);
     expect(wrapper.queryByText('ab')).not.toBeInTheDocument();
   });

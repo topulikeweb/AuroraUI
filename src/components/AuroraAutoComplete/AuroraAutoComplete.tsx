@@ -1,138 +1,156 @@
-import React, { ChangeEvent, FC, ReactElement, useEffect, useState, KeyboardEvent } from 'react';
+import React, {
+  FC,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+} from 'react';
+import classNames from 'classnames';
 import AuroraInput, { InputProps } from '../AuroraInput/AuroraInput';
 import AuroraIcon from '../AuroraIcon/AuroraIcon';
+import AuroraTransition from '../AuroraTransition/AuroraTransition';
 import useDebounce from '../../hooks/useDebounce';
-import classNames from 'classnames';
-import './_style.scss';
+import useClickOutside from '../../hooks/useClickOutside';
 
 interface DataSourceObject {
   value: string;
 }
 
 export type DataSourceType<T = '{}'> = T & DataSourceObject;
+type FetchSuggestionsFunction = (str: string) => DataSourceType[] | any;
 
 export interface autoCompleteProps extends Omit<InputProps, 'onSelect'> {
-  fetchSuggestions: (str: string) => DataSourceType[] | Promise<DataSourceType[]>;
-  onSelect?: (item: string) => void;
-  // 支持用户对列表进行自定义操作
-  renderOption?: (item: string) => ReactElement;
+  fetchSuggestions: FetchSuggestionsFunction;
+  onSelect?: (item: DataSourceType) => void;
+  renderOption?: (item: DataSourceType) => ReactElement;
+  renderOptions?: any;
 }
 
 export const AuroraAutoComplete: FC<autoCompleteProps> = (props) => {
   const { fetchSuggestions, onSelect, value, renderOption, ...restProps } = props;
+
+  const [inputValue, setInputValue] = useState(value as string);
+  const [suggestions, setSugestions] = useState<DataSourceType[]>([]);
   const [loading, setLoading] = useState(false);
-  const [inputValue, setInputValue] = useState(value);
-
-  const [hightLightIndex, setHightLightIndex] = useState(-1);
-  // onChange的回调 suggestion表示返回的数组
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const debouncedValue = useDebounce(inputValue, 500);
-
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [highlightIndex, setHighlightIndex] = useState(-1);
+  const triggerSearch = useRef(false);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const debouncedValue = useDebounce(inputValue, 300);
+  useClickOutside(componentRef, () => {
+    setSugestions([]);
+  });
   useEffect(() => {
-    if (debouncedValue) {
+    if (debouncedValue && triggerSearch.current) {
+      setSugestions([]);
       const results = fetchSuggestions(debouncedValue);
-      // 判断如果results是promise类型
       if (results instanceof Promise) {
         setLoading(true);
-        results.then((res) => {
-          console.log(res);
-          setSuggestions(res);
+        results.then((data) => {
           setLoading(false);
+          setSugestions(data);
+          if (data.length > 0) {
+            setShowDropdown(true);
+          }
         });
       } else {
-        setSuggestions(results);
+        setSugestions(results);
+        setShowDropdown(true);
+        if (results.length > 0) {
+          setShowDropdown(true);
+        }
       }
     } else {
-      setSuggestions([]);
+      setShowDropdown(false);
     }
-  }, [debouncedValue]);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // 获取输入的value
-    const value = e.target.value.trim();
-    // 起到数据双向绑定的坐拥
-    setInputValue(value);
-    // fetchSuggestion是返回异步的方法，传入输入的value，然后限定后端返回来建议的数组
-  };
-  console.log(suggestions, 111);
-  const handleSelect = (item: any) => {
-    setInputValue(item);
-    setSuggestions([]);
-    if (onSelect) {
-      onSelect(item.value);
+    setHighlightIndex(-1);
+  }, [debouncedValue, fetchSuggestions]);
+  const highlight = (index: number) => {
+    if (index < 0) index = 0;
+    if (index >= suggestions.length) {
+      index = suggestions.length - 1;
     }
+    setHighlightIndex(index);
   };
-  const renderTemplate = (item: DataSourceType) => {
-    return renderOption ? renderOption(item) : item.value;
-  };
-  /**
-   *  生成返回列表
-   */
-  const generateDropdown = () => {
-    console.log(hightLightIndex, 11);
-    return (
-      <ul>
-        {suggestions.map((item: any, index) => {
-          const classes = classNames('suggestion-item', {
-            'item-highlight': index === hightLightIndex,
-          });
-          return (
-            <li key={index} onClick={() => handleSelect(item)} className={classes}>
-              {renderTemplate(item)}
-            </li>
-          );
-        })}
-      </ul>
-    );
-  };
-  const hightLight = (index: number) => {
-    if (index < 0) {
-      index = 0;
-    }
-    if (index > suggestions.length) {
-      index = suggestions.length;
-    }
-    setHightLightIndex(index);
-  };
-  /**
-   *键盘事件
-   */
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     switch (e.keyCode) {
       case 13:
-        // 如果没有suggestions的时候可能会报错，所以要加上限制
-        if (suggestions[hightLightIndex]) {
-          handleSelect(suggestions[hightLightIndex]);
+        if (suggestions[highlightIndex]) {
+          handleSelect(suggestions[highlightIndex]);
         }
         break;
       case 38:
-        hightLight(hightLightIndex - 1);
+        highlight(highlightIndex - 1);
         break;
       case 40:
-        hightLight(hightLightIndex + 1);
+        highlight(highlightIndex + 1);
         break;
       case 27:
-        // ESC
-        setSuggestions([]);
+        setShowDropdown(false);
         break;
       default:
         break;
     }
   };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim();
+    setInputValue(value);
+    triggerSearch.current = true;
+  };
+  const handleSelect = (item: DataSourceType) => {
+    setInputValue(item.value);
+    setShowDropdown(false);
+    if (onSelect) {
+      onSelect(item);
+    }
+    triggerSearch.current = false;
+  };
+  const renderTemplate = (item: DataSourceType) => {
+    return renderOption ? renderOption(item) : item.value;
+  };
+  const generateDropdown = () => {
+    return (
+      <AuroraTransition
+        in={showDropdown || loading}
+        animation="zoom-in-top"
+        timeout={300}
+        onExited={() => {
+          setSugestions([]);
+        }}
+      >
+        <ul className="viking-suggestion-list">
+          {loading && (
+            <div className="suggstions-loading-icon">
+              <AuroraIcon icon="spinner" spin />
+            </div>
+          )}
+          {suggestions.map((item, index) => {
+            const cnames = classNames('suggestion-item', {
+              'is-active': index === highlightIndex,
+            });
+            return (
+              <li key={index} className={cnames} onClick={() => handleSelect(item)}>
+                {renderTemplate(item)}
+              </li>
+            );
+          })}
+        </ul>
+      </AuroraTransition>
+    );
+  };
   return (
-    <div className="viking-auto-complete">
+    <div className="viking-auto-complete" ref={componentRef}>
       <AuroraInput
         value={inputValue}
         onChange={handleChange}
-        {...restProps}
         onKeyDown={handleKeyDown}
-      ></AuroraInput>
-      {loading && (
-        <ul>
-          <AuroraIcon icon="spinner" spin></AuroraIcon>
-        </ul>
-      )}
-      {suggestions.length > 0 && generateDropdown()}
+        {...restProps}
+      />
+      {generateDropdown()}
     </div>
   );
 };
+
+export default AuroraAutoComplete;

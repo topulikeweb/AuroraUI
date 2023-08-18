@@ -2,6 +2,7 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { AuroraAutoComplete } from './AuroraAutoComplete';
 import { action } from '@storybook/addon-actions';
+import './_style.scss';
 
 const meta: Meta = {
   title: 'AutoComplete Component',

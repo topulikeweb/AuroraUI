@@ -7,6 +7,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import AuroraTransition from './components/AuroraTransition/AuroraTransition';
 import AuroraInput from './components/AuroraInput/AuroraInput';
+import AuroraIcon from './components/AuroraIcon/AuroraIcon';
 // 添加所有SVG图标
 library.add(fas);
 const App: React.FC = () => {
@@ -56,6 +57,8 @@ const App: React.FC = () => {
       </AuroraTransition>
 
       <AuroraInput style={{ width: 300 }} defaultValue={1111} value={'hhhh'}></AuroraInput>
+
+      <AuroraIcon icon={'coffee'} theme={'info'}></AuroraIcon>
     </div>
   );
 };
