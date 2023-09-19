@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import './_style.scss';
 
 interface DraggerProps {
   onFile: (files: FileList) => void;

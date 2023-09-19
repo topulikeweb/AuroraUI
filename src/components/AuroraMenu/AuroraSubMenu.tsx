@@ -5,7 +5,6 @@ import { MenuItemProps } from './AuroraMenuItem';
 import AuroraIcon from '../AuroraIcon/AuroraIcon';
 import { IconProp, library, SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { CSSTransition } from 'react-transition-group';
 import AuroraTransition from '../AuroraTransition/AuroraTransition';
 
 library.add(fas);

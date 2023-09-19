@@ -30,9 +30,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": " npm run build-css && npm run build-ts",
+    "build-ts": "tsc -p tsconfig.build.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
+    "clean": "rimraf ./build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -75,6 +78,7 @@
     "prop-types": "15.8.1",
     "react-test-renderer": "^18.2.0",
     "resolve-url-loader": "^5.0.0",
+    "rimraf": "^5.0.1",
     "storybook": "7.0.27",
     "webpack": "5.88.1"
   }

@@ -3,7 +3,6 @@ import axios from 'axios';
 import Dragger from './dragger';
 import UploadList from './uploadList';
 import './_style.scss';
-
 export interface UploadFile {
   uid: string;
   size: number;
@@ -44,24 +43,8 @@ interface IProps {
 }
 
 const AuroraUpload: React.FC<IProps> = (props) => {
-  const {
-    accept,
-    multiple,
-    defaultFileList,
-    action,
-    name,
-    headers,
-    withCredentials,
-    onProgress,
-    onSuccess,
-    onChange,
-    data,
-    onError,
-    beforeUpload,
-    drag,
-    children,
-    onRemove,
-  } = props;
+  const { accept, multiple, defaultFileList, action, name, headers, withCredentials, onProgress, onSuccess, onChange, data, onError, beforeUpload, drag, children, onRemove } =
+    props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
   const handleRemove = (file: UploadFile) => {
@@ -78,7 +61,7 @@ const AuroraUpload: React.FC<IProps> = (props) => {
    * 文件上传
    */
   const uploadFiles = (files: FileList) => {
-    const postFiles = Array.from(files);
+   const postFiles = Array.from(files);
     postFiles.forEach((file) => {
       if (!beforeUpload) {
         post(file);
@@ -88,7 +71,7 @@ const AuroraUpload: React.FC<IProps> = (props) => {
           result.then((processedFile) => {
             post(processedFile);
           });
-        } else if (result) {
+        } else if (result !== false) {
           post(file);
         }
       }
@@ -131,7 +114,7 @@ const AuroraUpload: React.FC<IProps> = (props) => {
    */
   const post = (file: File) => {
     const _file: UploadFile = {
-      uid: Date.now() + 'upload_file',
+      uid: Date.now() + 'upload-file',
       status: 'ready',
       name: file.name,
       size: file.size,
@@ -160,7 +143,10 @@ const AuroraUpload: React.FC<IProps> = (props) => {
           if (e.total !== undefined) {
             const percentage = Math.round((e.loaded * 100) / e.total) || 0;
             if (percentage < 100) {
-              updateFileList(_file, { percent: percentage, status: 'uploading' });
+              updateFileList(_file, {
+                percent: percentage,
+                status: 'uploading',
+              });
             }
             if (onProgress) {
               onProgress(percentage, file);
@@ -189,11 +175,7 @@ const AuroraUpload: React.FC<IProps> = (props) => {
   };
   return (
     <div className={'viking-upload-component'}>
-      <div
-        className="viking-upload-input"
-        style={{ display: 'inline-block' }}
-        onClick={handleClick}
-      >
+      <div className="viking-upload-input" style={{ display: 'inline-block' }} onClick={handleClick}>
         {drag ? (
           <Dragger
             onFile={(files) => {
@@ -205,18 +187,13 @@ const AuroraUpload: React.FC<IProps> = (props) => {
         ) : (
           children
         )}
-        <input
-          className="viking-file-input"
-          style={{ display: 'none' }}
-          ref={fileInput}
-          onChange={handleFileChange}
-          type="file"
-          accept={accept}
-          multiple={multiple}
-        />
+        <input className="viking-file-input" style={{ display: 'none' }} ref={fileInput} onChange={handleFileChange} type="file" accept={accept} multiple={multiple} />
       </div>
-      <UploadList fileList={fileList} onRemove={handleRemove}></UploadList>
+      <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
+};
+AuroraUpload.defaultProps = {
+  name: 'file',
 };
 export default React.memo(AuroraUpload);

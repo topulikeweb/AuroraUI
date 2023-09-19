@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import AuroraUpload from './AuroraUpload';
-import './_style.scss';
 import { action } from '@storybook/addon-actions';
 
 const meta: Meta = {
