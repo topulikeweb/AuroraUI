@@ -1,24 +1,40 @@
 {
-  "name": "aurora",
-  "version": "0.1.0",
-  "private": true,
+  "name": "aurora-topu",
+  "version": "0.1.2",
+  "private": false,
+  "description": "React component library",
+  "license": "MIT",
+  "author": {
+    "name": "ToPu",
+    "email": "2831656901@qq.com"
+  },
+  "keywords": [
+    "component",
+    "UI",
+    "React",
+    "antDesign"
+  ],
+  "homepage": "https://github.com/topulikeweb/AuroraUI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/topulikeweb/AuroraUI"
+  },
+  "files": [
+    "build"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/classnames": "^2.3.1",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.38",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
     "axios": "^1.5.0",
     "classnames": "^2.3.2",
     "eslint": "^8.44.0",
     "prettier": "^2.8.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
     "sass": "^1.63.6",
@@ -36,8 +52,10 @@
     "eject": "react-scripts eject",
     "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
     "clean": "rimraf ./build",
+    "lint": "eslint --ext js,ts,tsx src",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublish": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -57,7 +75,16 @@
       "last 1 safari version"
     ]
   },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.38",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@storybook/addon-essentials": "7.0.27",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-interactions": "7.0.27",
@@ -78,6 +105,8 @@
     "prop-types": "15.8.1",
     "react-test-renderer": "^18.2.0",
     "resolve-url-loader": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rimraf": "^5.0.1",
     "storybook": "7.0.27",
     "webpack": "5.88.1"
