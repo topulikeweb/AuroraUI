@@ -10,7 +10,7 @@ import './_style.scss';
  * 如何使用AuroraMenu？
  *
  * ~~~js
- * import {AuroraMenu} from 'AuroraUI'
+ * import {AuroraMenu} from 'aurora-topu'
  * ~~~
  */
 const meta: Meta = {

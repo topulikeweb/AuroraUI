@@ -3,6 +3,11 @@ import { Meta, StoryObj } from '@storybook/react';
 import AuroraUpload from './AuroraUpload';
 import { action } from '@storybook/addon-actions';
 
+/**
+ * ~~~js
+ * import {AuroraUpload} from 'aurora-topu'
+ * ~~~
+ */
 const meta: Meta = {
   title: 'Upload Component',
   component: AuroraUpload,

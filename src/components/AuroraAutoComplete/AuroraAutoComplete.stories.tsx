@@ -1,9 +1,14 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
-import { AuroraAutoComplete } from './AuroraAutoComplete';
-import { action } from '@storybook/addon-actions';
+import {Meta, StoryObj} from '@storybook/react';
+import {AuroraAutoComplete} from './AuroraAutoComplete';
+import {action} from '@storybook/addon-actions';
 import './_style.scss';
 
+/**
+ * ~~~js
+ * import {AuroraComponent} from 'aurora-topu'
+ * ~~~
+ */
 const meta: Meta = {
   title: 'AutoComplete Component',
   component: AuroraAutoComplete,
@@ -13,14 +18,14 @@ type Story = StoryObj<typeof meta>;
 
 const handleFetch = (query: string) => {
   return fetch(`https://api.github.com/search/users?q=${query}`)
-    .then((res) => res.json())
-    .then(({ items }) => {
-      console.log(items);
-      return items.slice(0, 10).map((item: any) => ({
-        value: item.login,
-        ...item,
-      }));
-    });
+      .then((res) => res.json())
+      .then(({items}) => {
+        console.log(items);
+        return items.slice(0, 10).map((item: any) => ({
+          value: item.login,
+          ...item,
+        }));
+      });
 };
 
 export const 自定义搜索结果模板: Story = {

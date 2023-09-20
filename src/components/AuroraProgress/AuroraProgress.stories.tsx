@@ -1,6 +1,12 @@
-import { Meta, StoryObj } from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import AuroraProgress from './AuroraProgress';
 
+/**
+ * ~~~js
+ * import {AuroraProgress} from 'aurora-topu'
+ * ~~~
+ *
+ */
 const meta: Meta = {
   title: 'Progress Component',
   component: AuroraProgress,

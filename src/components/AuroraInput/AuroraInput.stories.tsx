@@ -6,7 +6,7 @@ import AuroraInput from './AuroraInput';
  * 如何使用AuroraInput?
  *
  * ~~~js
- * import {AuroraInput} from 'AuroraUI'
+ * import {AuroraInput} from 'aurora-topu'
  * ~~~
  *
  * 基本是支持所有的 HTMLInput 的所有属性

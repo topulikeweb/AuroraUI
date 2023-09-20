@@ -8,7 +8,7 @@ import AuroraButton from './AuroraButton';
  * 如何使用AuroraButton
  *
  * ~~~js
- * import {AuroraButton} from 'AuroraUI'
+ * import {AuroraButton} from 'aurora-topu'
  * ~~~
  */
 const meta = {
