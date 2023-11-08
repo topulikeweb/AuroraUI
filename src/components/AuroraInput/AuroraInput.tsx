@@ -37,6 +37,7 @@ export const AuroraInput: React.FC<InputProps> = (props) => {
   // 如果用户传递了value，就将原来的value经过处理换掉，防止出现undefined和null的情况出现
   if ('value' in restProps) {
     delete restProps.defaultValue;
+    // @ts-ignore
     restProps.value = fixControlledValue(restProps.value);
   }
   return (
